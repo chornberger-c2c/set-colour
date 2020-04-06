@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 from json import dumps
@@ -23,6 +23,13 @@ class Background(Resource):
         return { 'status': 'success'}
 
 api.add_resource(Background, '/background')
+
+@app.route('/')
+def index():
+    conn  = db_connect.connect()
+    query = conn.execute("SELECT * FROM colour ORDER BY background DESC LIMIT 1")
+    bgc   = query.cursor.fetchall()
+    return render_template('index.html', background=bgc[0])
 
 if __name__ == "__main__":
     app.run()

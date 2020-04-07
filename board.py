@@ -19,7 +19,7 @@ class Background(Resource):
         conn       = db_connect.connect()
         print(request.json)
         background = request.json['background']
-        query      = conn.execute("insert into colour values('{0}')".format(background))
+        query      = conn.execute("insert into colour (background) values('{0}')".format(background))
         return { 'status': 'success'}
 
 api.add_resource(Background, '/background')
@@ -27,11 +27,12 @@ api.add_resource(Background, '/background')
 @app.route('/')
 def index():
     conn  = db_connect.connect()
-    query = conn.execute("SELECT * FROM colour ORDER BY background DESC LIMIT 1")
+    query = conn.execute("SELECT * FROM colour ORDER BY id DESC LIMIT 1")
     bgc   = query.cursor.fetchall()
     for colour in bgc:
-        print(colour[0])
-        return render_template('index.html', background=colour[0])
+        c = colour[1]
+        print(c)
+    return render_template('index.html', background=c)
 
 if __name__ == "__main__":
     app.run()

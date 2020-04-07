@@ -29,7 +29,9 @@ def index():
     conn  = db_connect.connect()
     query = conn.execute("SELECT * FROM colour ORDER BY background DESC LIMIT 1")
     bgc   = query.cursor.fetchall()
-    return render_template('index.html', background=bgc[0])
+    for colour in bgc:
+        print(colour[0])
+        return render_template('index.html', background=colour[0])
 
 if __name__ == "__main__":
     app.run()

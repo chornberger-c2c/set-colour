@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: setcolour
+  name: setcolour
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: setcolour
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: setcolour
+    spec:
+      containers:
+      - image: localhost:5000/horni/setcolour:latest
+        name: setcolour
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+

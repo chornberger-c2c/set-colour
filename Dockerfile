@@ -8,6 +8,7 @@ ADD board.wsgi /var/www/html/pyhon/
 RUN chmod +x /var/www/html/python/board.wsgi
 ADD colour.db /var/www/html/pyhon/
 ADD templates/index.html /var/www/html/python/templates
+RUN a2enmod wsgi
 ADD herrhornberger.de.conf /etc/apache2/sites-enabled
 EXPOSE 80
 CMD ["apachectl", "-D", "FOREGROUND"]

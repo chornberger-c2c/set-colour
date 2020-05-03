@@ -10,17 +10,17 @@ curl -X POST -H "Content-Type: application/json" -d '{"background":"green"}' htt
 
 **Docker**
 
-sudo docker run -d -p 5000:5000 --restart=always --name registry registry:2
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
-sudo docker build -t setcolour .
+docker build -t setcolour .
 
-sudo docker run setcolour
+docker run setcolour
 
-sudo docker commit e82a40a9c816 setcolour
+docker commit e82a40a9c816 setcolour
 
-sudo docker tag setcolour localhost:5000/horni/setcolour
+docker tag setcolour localhost:5000/horni/setcolour
 
-sudo docker push localhost:5000/horni/setcolour
+docker push localhost:5000/horni/setcolour
 
 
 **Kubernetes**

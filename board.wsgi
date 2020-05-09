@@ -4,6 +4,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 from json import dumps
+from uptime import uptime
+from uptime import boottime
 
 db_connect  = create_engine('sqlite:///var/www/html/python/colour.db')
 application = Flask(__name__)
@@ -22,7 +24,13 @@ class Background(Resource):
         query      = conn.execute("insert into colour (background) values('{0}')".format(background))
         return { 'status': 'success'}
 
+class Uptime(Resource):
+    def get(self):
+        print uptime()
+        print boottime()
+
 api.add_resource(Background, '/background')
+api.add_resource(Uptime, '/uptime')
 
 @application.route('/')
 def index():

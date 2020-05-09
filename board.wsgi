@@ -26,8 +26,9 @@ class Background(Resource):
 
 class Uptime(Resource):
     def get(self):
-        print uptime()
-        print boottime()
+        boot=uptime.boottime()
+        #print uptime()
+        print(boot)
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')

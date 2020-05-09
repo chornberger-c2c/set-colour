@@ -4,8 +4,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 from json import dumps
-from uptime import uptime
-from uptime import boottime
+import uptime
 
 db_connect  = create_engine('sqlite:///var/www/html/python/colour.db')
 application = Flask(__name__)

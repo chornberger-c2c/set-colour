@@ -27,7 +27,8 @@ class Uptime(Resource):
     def get(self):
         boot = uptime.boottime()
         up   = uptime.uptime()
-        return { 'booted': json.dumps(boot, default = str).strip('"') }
+        return { 'booted': json.dumps(boot, default = str).strip('"')}
+               { 'seconds': up }
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')

@@ -3,7 +3,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
-from json import dumps
+import json
 import uptime
 
 db_connect  = create_engine('sqlite:///var/www/html/python/colour.db')

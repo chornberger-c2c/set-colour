@@ -29,7 +29,7 @@ class Uptime(Resource):
         up   = uptime.uptime()
         def convert(timetostring):
             return timetostring.__str__()
-        return { 'booted': print(json.dumps(boot, default = convert)) }
+        return { 'booted': json.dumps(boot, default = convert) }
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')

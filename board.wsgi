@@ -5,6 +5,7 @@ from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 import json
 import uptime
+import datetime
 
 db_connect  = create_engine('sqlite:///var/www/html/python/colour.db')
 application = Flask(__name__)
@@ -26,8 +27,9 @@ class Background(Resource):
 class Uptime(Resource):
     def get(self):
         boot = uptime.boottime()
-        #up   = uptime.uptime()
-        return { 'booted': json.dumps(boot, default = str).strip('"') }
+        up   = uptime.uptime()
+        readable_up = str(datetime.timedelta(seconds=round(up)))
+        return { 'booted': json.dumps(boot, default = str).strip('"') and 'up since': json.dumps(readable_up, default = str).strip('"') }
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')

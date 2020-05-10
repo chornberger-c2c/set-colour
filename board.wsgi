@@ -14,14 +14,14 @@ api         = Api(application)
 class Background(Resource):
     def get(self):
         conn  = db_connect.connect()
-        query = conn.execute("select background from colour")
+        query = conn.execute("SELECT background FROM colour")
         return { 'background': [i[0] for i in query.cursor.fetchall()]}
 
     def post(self):
         conn       = db_connect.connect()
         print(request.json)
         background = request.json['background']
-        query      = conn.execute("insert into colour (background) values('{0}')".format(background))
+        query      = conn.execute("INSERT INTO colour (background) VALUES('{0}')".format(background))
         return { 'status': 'success'}
 
 class Uptime(Resource):
@@ -30,7 +30,6 @@ class Uptime(Resource):
         up          = uptime.uptime()
         readable_up = str(datetime.timedelta(seconds=round(up)))
         return jsonify(up = readable_up, boot = boot)
-#        return { 'booted': json.dumps(boot, default = str).strip('"') and 'up since': json.dumps(readable_up, default = str).strip('"') }
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')

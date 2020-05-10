@@ -26,10 +26,11 @@ class Background(Resource):
 
 class Uptime(Resource):
     def get(self):
-        boot = uptime.boottime()
-        up   = uptime.uptime()
+        boot        = uptime.boottime()
+        up          = uptime.uptime()
         readable_up = str(datetime.timedelta(seconds=round(up)))
-        return { 'booted': json.dumps(boot, default = str).strip('"') and 'up since': json.dumps(readable_up, default = str).strip('"') }
+        return jsonify(up = readable_up, boot = boot)
+#        return { 'booted': json.dumps(boot, default = str).strip('"') and 'up since': json.dumps(readable_up, default = str).strip('"') }
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')

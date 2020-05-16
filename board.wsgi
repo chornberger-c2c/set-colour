@@ -21,7 +21,7 @@ class Background(Resource):
         conn       = db_connect.connect()
         print(request.json)
         background = request.json['background']
-        query      = conn.execute("INSERT INTO colour (background) VALUES('{0}')".format(background))
+        query      = conn.execute("UPDATE colour SET background = '{0}' WHERE id = 1".format(background))
         return { 'status': 'success'}
 
 class Uptime(Resource):

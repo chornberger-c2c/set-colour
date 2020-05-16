@@ -8,14 +8,17 @@ import uptime
 import datetime
 
 db_connect  = create_engine('sqlite:///var/www/html/python/colour.db')
+#TODO create table if non-existant with
+#create table colour(id integer primary key autoincrement, background varchar(255));
+
 application = Flask(__name__)
 api         = Api(application)
 
 class Background(Resource):
     def get(self):
         conn  = db_connect.connect()
-        query = conn.execute("SELECT background FROM colour")
-        return { 'background': [i[0] for i in query.cursor.fetchall()]}
+        query = conn.execute("SELECT background FROM colour WHERE id = 1")
+        return { 'background': i[0] for i in query.cursor.fetchall()}
 
     def post(self):
         conn       = db_connect.connect()

@@ -21,12 +21,12 @@ api         = Api(application)
 
 class Background(Resource):
     def get(self):
-        conn  = db_connect.connect()
+        conn  = engine.connect()
         query = conn.execute("SELECT background FROM colour WHERE id = 1")
         return { 'background': i[0] for i in query.cursor.fetchall()}
 
     def post(self):
-        conn       = db_connect.connect()
+        conn       = engine.connect()
         print(request.json)
         background = request.json['background']
         query      = conn.execute("UPDATE colour SET background = '{0}' WHERE id = 1".format(background))
@@ -44,7 +44,7 @@ api.add_resource(Uptime, '/uptime')
 
 @application.route('/')
 def index():
-    conn  = db_connect.connect()
+    conn  = engine.connect()
     query = conn.execute("SELECT * FROM colour ORDER BY id DESC LIMIT 1")
     bgc   = query.cursor.fetchall()
     for colour in bgc:

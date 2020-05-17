@@ -12,12 +12,14 @@ meta_data    = db.MetaData()
 connection   = engine.connect()
 create_table = db.Table('colour', meta_data,
                  db.Column('id',db.Integer, primary_key=True),
-                 db.Column('background',db.String(255), default="green")
+                 db.Column('background',db.String(255))
                )
 meta_data.create_all(engine)
 
-query  = db.insert(create_table).values(background='green')
-result = connection.execute(query)
+query  = connection.execute("SELECT background FROM colour WHERE id = 1")
+if query.cursor.fetchall() == ""
+    push  = db.insert(create_table).values(background='green')
+    result = connection.execute(query)
  
 application = Flask(__name__)
 api         = Api(application)

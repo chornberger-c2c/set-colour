@@ -16,11 +16,10 @@ create_table = db.Table('colour', meta_data,
                )
 meta_data.create_all(engine)
 
-# query  = connection.execute("SELECT background FROM colour WHERE id = 1")
-# row    = query.cursor.fetchone()
+query  = connection.execute("SELECT background FROM colour WHERE id = 1")
+row    = query.cursor.fetchone()
 
-if db.query(create_table).first() == None:
-#if row == "None":
+if row == None:
     push  = db.insert(create_table).values(id=1,background='green')
     result = connection.execute(push)
  

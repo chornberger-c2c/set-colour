@@ -16,7 +16,7 @@ create_table = db.Table('colour', meta_data,
                )
 meta_data.create_all(engine)
 
-query  = db.insert(create_table).values(id=1,background='green')
+query  = db.insert(create_table).values(background='green')
 result = connection.execute(query)
  
 application = Flask(__name__)

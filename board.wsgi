@@ -2,14 +2,19 @@
 
 from flask import Flask, request, jsonify, render_template
 from flask_restful import Resource, Api
-from sqlalchemy import create_engine
+import sqlalchemy as db
 import json
 import uptime
 import datetime
 
-db_connect  = create_engine('sqlite:///var/www/html/python/colour.db')
-#TODO create table if non-existant with
-#create table colour(id integer primary key autoincrement, background varchar(255));
+engine       = db.create_engine('sqlite:///var/www/html/python/colour.db')
+meta_data    = db.MetaData()
+connection   = engine.connect()
+create_table = db.Table('colour', MetaData,
+                 db.Column('id',db.Integer, primary_key=True),
+                 db.Column('background',db.String(255), default="green")
+               )
+meta_data.create_all(engine)
 
 application = Flask(__name__)
 api         = Api(application)
@@ -49,4 +54,3 @@ def index():
 
 if __name__ == "__main__":
     application.run()
-

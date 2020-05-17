@@ -10,7 +10,7 @@ import datetime
 engine       = db.create_engine('sqlite:///var/www/html/python/colour.db')
 meta_data    = db.MetaData()
 connection   = engine.connect()
-create_table = db.Table('colour', MetaData,
+create_table = db.Table('colour', meta_data,
                  db.Column('id',db.Integer, primary_key=True),
                  db.Column('background',db.String(255), default="green")
                )

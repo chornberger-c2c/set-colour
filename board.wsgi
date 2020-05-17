@@ -17,7 +17,7 @@ create_table = db.Table('colour', meta_data,
 meta_data.create_all(engine)
 
 query  = connection.execute("SELECT background FROM colour WHERE id = 1")
-if query.cursor.fetchall() == ""
+if not query.cursor.fetchall() 
     push  = db.insert(create_table).values(background='green')
     result = connection.execute(query)
  

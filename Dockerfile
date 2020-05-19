@@ -5,11 +5,9 @@ RUN apt update && apt upgrade; \
     pip3 install flask flask_restful sqlalchemy; \
     mkdir -p /var/www/html/python/templates;
 ADD board.wsgi /var/www/html/python/
-ADD colour.db /var/www/html/python/
 ADD templates/index.html /var/www/html/python/templates
 ADD herrhornberger.de.conf /etc/apache2/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
-    chmod +w /var/www/html/python/colour.db; \
     chown -R www-data /var/www/html/python; \
     rm /var/www/html/index.html;
 EXPOSE 80

@@ -42,4 +42,4 @@ kubectl get svc setcolour
 
 - include service nodeport in setcolour.yaml
 
-- Helm
+- Helm, ArgoCD

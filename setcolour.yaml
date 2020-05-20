@@ -20,10 +20,11 @@ spec:
       containers:
       - image: docker.pkg.github.com/horni23/set-colour/setcolour:latest
         name: setcolour
-      imagePullSecrets:
-      - name: githubregistry
         ports:
         - containerPort: 80
         resources: {}
+      imagePullSecrets:
+      - name: githubregistry
+      
 status: {}
 

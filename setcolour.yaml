@@ -18,7 +18,7 @@ spec:
         app: setcolour
     spec:
       containers:
-      - image: docker.pkg.github.com/horni23/set-colour/setcolour:latest
+      - image: docker.pkg.github.com/horni23/set-colour/setcolour:2.0
         name: setcolour
         ports:
         - containerPort: 80

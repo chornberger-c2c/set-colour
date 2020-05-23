@@ -22,24 +22,15 @@ docker tag setcolour localhost:5000/horni/setcolour
 
 docker push localhost:5000/horni/setcolour
 
-**Container for Github**
-
-cat .token | sudo docker login docker.pkg.github.com --username horni23 --password-stdin
-
-sudo docker tag setcolour docker.pkg.github.com/horni23/set-colour/setcolour:2.0
-
-sudo docker push docker.pkg.github.com/horni23/set-colour/setcolour:2.0
 
 **Kubernetes**
 
 kubectl apply -f setcolour.yaml
 
-kubectl create svc nodeport setcolour --tcp=80
+kubectl apply -f service.yaml
 
-kubectl get svc setcolour
+kubectl apply -f ingress.yaml
 
 **TODO**
-
-- include service nodeport in setcolour.yaml
 
 - Helm, ArgoCD

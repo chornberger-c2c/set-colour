@@ -23,8 +23,5 @@ spec:
         ports:
         - containerPort: 80
         resources: {}
-      imagePullSecrets:
-      - name: githubregistry
-      
 status: {}
 

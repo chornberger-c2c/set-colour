@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: setcolour
+spec:
+  rules:
+  - host: herrhornberger.de
+    http:
+      paths:
+      - backend:
+          serviceName: setcolour
+          servicePort: 80
+        path: /

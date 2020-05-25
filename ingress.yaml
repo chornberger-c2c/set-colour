@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1 
+kind: Ingress
+metadata:
+  name: setcolour-ingress
+  annotations: 
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - host: herrhornberger.de
+    http:
+      paths:
+      - backend:
+          serviceName: setcolour-service
+          servicePort: 80
+        path: /

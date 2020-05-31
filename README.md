@@ -25,6 +25,8 @@ docker push localhost:5000/horni/setcolour
 
 **Kubernetes**
 
+kubectl create namespace cert-manager
+
 helm repo add jetstack https://charts.jetstack.io
 
 helm repo update

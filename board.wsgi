@@ -41,13 +41,18 @@ class Background(Resource):
 
 class Uptime(Resource):
     def get(self):
-        boot        = uptime.boottime()
         up          = uptime.uptime()
         readable_up = str(datetime.timedelta(seconds=round(up)))
-        return jsonify(up = readable_up, boot = boot)
+        return jsonify(up = readable_up)
+
+class Boot(Resource):
+    def get(self):
+        boot = uptime.boottime()
+        return jsonify(boot = boot)
 
 api.add_resource(Background, '/background')
 api.add_resource(Uptime, '/uptime')
+api.add_resource(Boot, '/boot')
 
 @application.route('/')
 def index():

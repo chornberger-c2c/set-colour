@@ -16,7 +16,7 @@ docker build -t setcolour .
 
 docker run setcolour
 
-docker commit $(docker ps | awk '/apachectl/ { print $1 }') setcolour
+docker commit $(docker ps | awk '/setcolour/ { print $1 }') setcolour
 
 docker tag setcolour localhost:5000/horni/setcolour
 

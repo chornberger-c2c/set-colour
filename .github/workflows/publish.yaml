@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   deploy:
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

@@ -4,6 +4,15 @@ on:
     branches: 
       - master
 jobs:
+  login:
+    runs-on: self-hosted
+    steps:
+      - name: Docker Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: docker.pkg.github.com
+          username: $GITHUB_ACTOR
+          password: ${{ secrets.GITHUB_TOKEN }}
   publish:
     runs-on: self-hosted
     steps:
@@ -14,6 +23,7 @@ jobs:
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
   deploy:
+    needs: [login, publish]
     runs-on: self-hosted
     steps:
       - name: deploy to cluster
@@ -21,11 +31,17 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: set image --record deployment/setcolour container=${{ github.repository }}:${{ github.sha }}
+          args: set image --record deployment/setcolour container=docker.pkg.github.com/horni23/set-colour/set-colour:master
+      # - name: apply all stuff
+      #   uses: steebchen/kubectl@master
+      #   env:
+      #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      #   with:
+      #     args: apply -f 
       - name: verify deployment
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
           KUBECTL_VERSION: "1.18"
         with:
-          args: '"rollout status deployment/my-app"'
+          args: '"rollout status deployment/setcolour"'

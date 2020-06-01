@@ -4,7 +4,7 @@ on:
     branches: 
       - master
 jobs:
-  deploy:
+  publish:
     runs-on: self-hosted
     steps:
       - name: Checkout Repository
@@ -13,4 +13,19 @@ jobs:
         uses: matootie/github-docker@v2.2.2
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
- 
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: deploy to cluster
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: set image --record deployment/setcolour container=${{ github.repository }}:${{ github.sha }}
+      - name: verify deployment
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBECTL_VERSION: "1.18"
+        with:
+          args: '"rollout status deployment/my-app"'

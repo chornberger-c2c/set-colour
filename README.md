@@ -33,13 +33,7 @@ helm repo update
 
 helm install   cert-manager jetstack/cert-manager   --namespace cert-manager   --version v0.15.1   --set installCRDs=true
 
-kubectl apply -f setcolour.yaml
-
-kubectl apply -f service.yaml
-
-kubectl apply -f ingress.yaml
-
-kubectl apply -f cert-staging.yaml cert.yaml tls-staging.yaml tls.yaml
+kubectl apply -f k8s/
 
 
 **TODO**

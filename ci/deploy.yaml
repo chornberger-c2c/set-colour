@@ -1,0 +1,20 @@
+name: docker
+on: 
+  push:
+    branches: 
+      - master
+  
+  jobs: deploy
+  steps:
+    - uses: actions/checkout@v2
+
+    - name: build image
+      run: docker build . --file Dockerfile --tag setcolour
+
+    - name: log into registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+    - name: publish
+      run: |
+        docker tag setcolour
+        docker push setcolour

@@ -1,3 +1,5 @@
+![docker](https://github.com/horni23/set-colour/workflows/docker/badge.svg)
+
 **DB table creation:**
 
 create table colour(id integer primary key autoincrement, background varchar(255));

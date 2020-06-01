@@ -1,4 +1,8 @@
 name: docker
+on:
+  push:
+    branches: 
+      - master
   steps:
     - name: Checkout Repository
       uses: actions/checkout@v2

@@ -26,22 +26,19 @@ jobs:
     needs: [login, publish]
     runs-on: self-hosted
     steps:
-      - name: deploy to cluster
-        uses: steebchen/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      - name: set k8s context
+        uses: Azure/k8s-set-context@v1
         with:
-          args: set image --record deployment/setcolour container=docker.pkg.github.com/horni23/set-colour/set-colour:master
-      # - name: apply all stuff
-      #   uses: steebchen/kubectl@master
-      #   env:
-      #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-      #   with:
-      #     args: apply -f 
-      - name: verify deployment
-        uses: steebchen/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          KUBECTL_VERSION: "1.18"
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+
+      - name: deploy k8s  
+        uses: Azure/k8s-deploy@v1
         with:
-          args: '"rollout status deployment/setcolour"'
+          manifests: |
+            k8s/setcolour.yaml
+            k8s/service.yaml
+            k8s/ingress.yaml
+            k8s/tls.yaml
+            k8s/cert.yaml
+          images: |
+            docker.pkg.github.com/horni23/set-colour/set-colour:master

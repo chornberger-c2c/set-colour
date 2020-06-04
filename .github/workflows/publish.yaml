@@ -21,7 +21,8 @@ jobs:
         uses: matootie/github-docker@v2.2.2
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-
+          imageTag: 3.0
+    
       - name: set k8s context
         uses: Azure/k8s-set-context@v1
         with:

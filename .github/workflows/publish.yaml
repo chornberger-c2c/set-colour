@@ -27,12 +27,13 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
-    - uses: Azure/k8s-create-secret@v1
-      with:
-        container-registry-url: docker.pkg.github.com
-        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: k8s-secret
+      - name: set secret
+        uses: Azure/k8s-create-secret@v1
+        with:
+          container-registry-url: docker.pkg.github.com
+          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          secret-name: k8s-secret
 
       - name: deploy k8s  
         uses: Azure/k8s-deploy@v1

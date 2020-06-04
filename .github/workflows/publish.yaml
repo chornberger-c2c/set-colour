@@ -45,6 +45,6 @@ jobs:
             k8s/tls.yaml
             k8s/cert.yaml
           images: |
-            docker.pkg.github.com/horni23/set-colour/set-colour:master
+            docker.pkg.github.com/horni23/set-colour/set-colour:latest
           imagepullsecrets: |
             k8s-secret

@@ -47,4 +47,4 @@ jobs:
           images: |
             docker.pkg.github.com/horni23/set-colour/set-colour:master
           imagepullsecrets: |
-          k8s-secret
+            k8s-secret

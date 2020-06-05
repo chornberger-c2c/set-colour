@@ -7,34 +7,15 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Docker Login
-        uses: azure/docker-login@v1
-        with:
-          login-server: docker.pkg.github.com
-          username: $GITHUB_ACTOR
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: build image
+        run: |
+          docker build . -t localhost:5000/horni/setcolour
+          docker push localhost:5000/horni/setcolour
 
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Publish Image
-        uses: matootie/github-docker@v2.2.2
-        with:
-          accessToken: ${{ secrets.GITHUB_TOKEN }}
-          imageTag: 3
-    
       - name: set k8s context
         uses: Azure/k8s-set-context@v1
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
-
-      - name: set secret
-        uses: Azure/k8s-create-secret@v1
-        with:
-          container-registry-url: docker.pkg.github.com
-          container-registry-username: $GITHUB_ACTOR
-          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
-          secret-name: k8s-secret
 
       - name: deploy k8s  
         uses: Azure/k8s-deploy@v1
@@ -46,6 +27,5 @@ jobs:
             k8s/tls.yaml
             k8s/cert.yaml
           images: |
-            docker.pkg.github.com/horni23/set-colour/set-colour:3
-          imagepullsecrets: |
-            k8s-secret
+            localhost:5000/horni/setcolour:latest
+     

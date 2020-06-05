@@ -1,4 +1,4 @@
-![docker](https://github.com/horni23/set-colour/workflows/docker/badge.svg)
+![publish](https://github.com/horni23/set-colour/workflows/publish/badge.svg)
 
 **DB table creation:**
 

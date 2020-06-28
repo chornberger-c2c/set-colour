@@ -23,19 +23,19 @@ jobs:
           args: create namespace cert-manager
 
       - name: install helm repo jetstack
-        uses: WyriHaximus/github-action-helm3@v1
+        uses: WyriHaximus/github-action-helm3@v2
         with:
           exec: helm repo add jetstack https://charts.jetstack.io
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
       - name: update cert-manager helm repo
-        uses: WyriHaximus/github-action-helm3@v1
+        uses: WyriHaximus/github-action-helm3@v2
         with:
           exec: helm repo update
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
       - name: install cert-manager helm repo
-        uses: WyriHaximus/github-action-helm3@v1
+        uses: WyriHaximus/github-action-helm3@v2
         with:
           exec: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.15.1 --set installCRDs=true
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}

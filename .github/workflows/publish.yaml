@@ -16,9 +16,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: create namespace cert-manager
-        uses: actions-hub/kubectl@master
+        uses: steebchen/kubectl@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBECTL_VERSION: "1.18"
         with:
           args: create namespace cert-manager
 

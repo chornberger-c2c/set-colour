@@ -15,6 +15,28 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
 
+      - name: create namespace cert-manager
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: create namespace cert-manager
+
+      - name: install helm repo jetstack
+        uses: WyriHaximus/github-action-helm3@v1
+        with:
+          exec: helm repo add jetstack https://charts.jetstack.io
+
+      - name: update cert-manager helm repo
+        uses: WyriHaximus/github-action-helm3@v1
+        with:
+          exec: helm repo update
+
+      - name: install cert-manager helm repo
+        uses: WyriHaximus/github-action-helm3@v1
+        with:
+          exec: helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.15.1 --set installCRDs=true
+
       - name: set k8s context
         uses: Azure/k8s-set-context@v1
         with:
@@ -29,5 +51,4 @@ jobs:
             k8s/ingress.yaml
             k8s/tls.yaml
             k8s/cert.yaml
-
      

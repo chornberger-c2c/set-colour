@@ -10,6 +10,7 @@ ADD herrhornberger.de.conf /etc/httpd/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
     rm /var/www/html/index.html; \
     sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf; \
+    sed -i "s|.*|#&|g" /etc/httpd/conf.d/welcome.conf
     mkdir -p /run/httpd; \
     chgrp -R 0 /run/httpd /etc/httpd /var/log/httpd /var/www; \
     chmod -R g=u /run/httpd/ /etc/httpd /var/log/httpd /var/www

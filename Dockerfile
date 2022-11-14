@@ -10,5 +10,5 @@ ADD herrhornberger.de.conf /etc/apache2/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
     chown -R www-data /var/www/html/python; \
     rm /var/www/html/index.html;
-EXPOSE 80
+EXPOSE 8080
 CMD ["apachectl", "-D", "FOREGROUND"]

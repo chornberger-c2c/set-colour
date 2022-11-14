@@ -11,6 +11,9 @@ ADD templates/index.html /var/www/html/python/templates
 ADD herrhornberger.de.conf /etc/apache2/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
     chown -R www-data /var/www/html/python; \
-    rm /var/www/html/index.html;
+    rm /var/www/html/index.html; \
+    mkdir -p /run/httpd; \
+    chgrp -R 0 /run/httpd /etc/apache2 /var/log/httpd /var/www; \
+    chmod -R g=u /run/httpd/ /etc/apache2 /var/log/httpd /var/www
 EXPOSE 8080
 CMD ["apachectl", "-D", "FOREGROUND"]

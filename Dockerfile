@@ -9,6 +9,7 @@ ADD templates/index.html /var/www/html/python/templates
 ADD herrhornberger.de.conf /etc/httpd/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
     rm /var/www/html/index.html; \
+    sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf; \
     mkdir -p /run/httpd; \
     chgrp -R 0 /run/httpd /etc/httpd /var/log/httpd /var/www; \
     chmod -R g=u /run/httpd/ /etc/httpd /var/log/httpd /var/www

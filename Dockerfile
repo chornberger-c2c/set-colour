@@ -1,4 +1,4 @@
-FROM ubi8 
+FROM almalinux:8 
 USER root
 RUN yum -y update; \
     yum install -y httpd python3-mod_wsgi python3-pip; \

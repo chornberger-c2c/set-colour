@@ -6,7 +6,7 @@ RUN yum -y update; \
     mkdir -p /var/www/html/python/templates;
 ADD board.wsgi /var/www/html/python/
 ADD templates/index.html /var/www/html/python/templates
-ADD herrhornberger.de.conf /etc/httpd/sites-enabled
+ADD herrhornberger.de.conf /etc/httpd/conf.d/
 RUN chmod +x /var/www/html/python/board.wsgi; \
     rm /var/www/html/index.html; \
     sed -i "s/Listen 80/Listen 8080/" /etc/httpd/conf/httpd.conf; \

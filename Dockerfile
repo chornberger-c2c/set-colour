@@ -10,7 +10,6 @@ ADD board.wsgi /var/www/html/python/
 ADD templates/index.html /var/www/html/python/templates
 ADD herrhornberger.de.conf /etc/apache2/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
-    chown -R www-data /var/www/html/python; \
     rm /var/www/html/index.html; \
     mkdir -p /run/apache2; \
     chgrp -R 0 /run/apache2 /etc/apache2 /var/log/apache2 /var/www; \

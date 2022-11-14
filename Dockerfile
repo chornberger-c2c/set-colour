@@ -3,7 +3,7 @@ USER root
 RUN yum -y update; \
     yum install -y httpd python3-mod_wsgi python3-pip; \
     pip3 install flask flask_restful sqlalchemy uptime; \
-    mkdir -p /var/www/html/python/templates; \
+    mkdir -p /var/www/html/python/templates;
 ADD board.wsgi /var/www/html/python/
 ADD templates/index.html /var/www/html/python/templates
 ADD herrhornberger.de.conf /etc/httpd/sites-enabled

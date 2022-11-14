@@ -12,8 +12,8 @@ ADD herrhornberger.de.conf /etc/apache2/sites-enabled
 RUN chmod +x /var/www/html/python/board.wsgi; \
     chown -R www-data /var/www/html/python; \
     rm /var/www/html/index.html; \
-    mkdir -p /run/httpd; \
-    chgrp -R 0 /run/httpd /etc/apache2 /var/log/httpd /var/www; \
-    chmod -R g=u /run/httpd/ /etc/apache2 /var/log/httpd /var/www
+    mkdir -p /run/apache2; \
+    chgrp -R 0 /run/apache2 /etc/apache2 /var/log/apache2 /var/www; \
+    chmod -R g=u /run/apache2/ /etc/apache2 /var/log/apache2 /var/www
 EXPOSE 8080
 CMD ["apachectl", "-D", "FOREGROUND"]

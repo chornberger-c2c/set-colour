@@ -33,7 +33,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"background":"blue"}' http
 oc new-project set-colour
 ```
 
-**New Build**
+**New BuildConfig**
 ```
 oc new-app https://github.com/chornberger-c2c/set-colour.git
 ```
